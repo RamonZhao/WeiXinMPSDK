@@ -20,41 +20,36 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
 
 /*----------------------------------------------------------------
     Copyright (C) 2017 Senparc
+ 
+    文件名：EntityHelper.cs
+    文件功能描述：实体帮助类
     
-    文件名：GetAuditStatusResultJson.cs
-    文件功能描述：审核ID返回结果
     
-    
-    创建标识：Senparc - 20170726
-
+    创建标识：Senparc - 20170809
 
 ----------------------------------------------------------------*/
 
-
-using Senparc.Weixin.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace Senparc.Weixin.Open.WxaAPIs
+namespace Senparc.Weixin.Helpers.Entity
 {
-    public class GetAuditStatusResultJson : WxJsonResult
+    /// <summary>
+    /// 实体帮助类
+    /// </summary>
+    public class EntityHelper
     {
-
-        /// <summary>
-        /// 最新的审核ID，只在使用GetLatestAuditStatus接口时才有返回值
-        /// </summary>
-        public string auditid { get; set; }
-        /// <summary>
-        /// 审核状态，其中0为审核成功，1为审核失败，2为审核中
-        /// </summary>
-        public int status { get; set; }
-
-        /// <summary>
-        /// 当status=1，审核被拒绝时，返回的拒绝原因
-        /// </summary>
-        public string reason { get; set; }
+        //public static void GetValue<T>(T entity, XElement root, string propName, PropertyInfo prop)
+        //    where T : /*MessageBase*/ class, new()
+        //{
+        //    T = new T();
+        //    FillEntityWithXml(music, new XDocument(root.Element(propName)));
+        //    prop.SetValue(entity, music, null);
+        //}
     }
 }
