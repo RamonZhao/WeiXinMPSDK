@@ -21,54 +21,43 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
 /*----------------------------------------------------------------
     Copyright (C) 2017 Senparc
     
-    文件名：DecodedUserInfo.cs
-    文件功能描述：用户信息解密类
+    文件名：WeixinNullReferenceException.cs
+    文件功能描述：对象为null的异常
     
     
-    创建标识：Senparc - 20170131
+    创建标识：Senparc - 20170912
+    
 ----------------------------------------------------------------*/
 
-
-
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Senparc.Weixin.WxOpen.Entities
+namespace Senparc.Weixin.Exceptions
 {
-    /*
-    "openId": "OPENID",
-    "nickName": "NICKNAME",
-    "gender": GENDER,
-    "city": "CITY",
-    "province": "PROVINCE",
-    "country": "COUNTRY",
-    "avatarUrl": "AVATARURL",
-    "unionId": "UNIONID",
-    "watermark":
-    {
-        "appid":"APPID",
-        "timestamp":TIMESTAMP
-    }
-    */
-
     /// <summary>
-    /// 解码后的用户信息
+    /// 菜单异常
     /// </summary>
-    [Serializable]
-    public class DecodedUserInfo : DecodeEntityBase
+    public class WeixinNullReferenceException : WeixinException
     {
-        public string openId { get; set; }
-        public string nickName { get; set; }
-        public int gender { get; set; }
-        public string city { get; set; }
-        public string province { get; set; }
-        public string country { get; set; }
-        public string avatarUrl { get; set; }
-        public string unionId { get; set; }
+        /// <summary>
+        /// 上一级不为null的对象（或对调试很重要的对象）。
+        /// 如果需要调试多个对象，可以传入数组，如：new {obj1, obj2}
+        /// </summary>
+        public object ParentObject { get; set; }
+        public WeixinNullReferenceException(string message)
+            : this(message, null, null)
+        {
+        }
+
+        public WeixinNullReferenceException(string message, object parentObject)
+            : this(message, parentObject, null)
+        {
+            ParentObject = parentObject;
+        }
+
+        public WeixinNullReferenceException(string message, object parentObject, Exception inner)
+            : base(message, inner)
+        {
+            ParentObject = parentObject;
+        }
     }
-
-
 }
