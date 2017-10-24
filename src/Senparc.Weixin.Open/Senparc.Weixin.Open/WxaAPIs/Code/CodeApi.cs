@@ -44,7 +44,7 @@ namespace Senparc.Weixin.Open.WxaAPIs
 {
     public class CodeApi
     {
-        #region 同步接口
+        #region 同步方法
         /// <summary>
         /// 为授权的小程序帐号上传小程序代码
         /// </summary>
@@ -202,14 +202,15 @@ namespace Senparc.Weixin.Open.WxaAPIs
 
             data = new
             {
-                action = action
+                action = action.ToString()
             };
 
             return CommonJsonSend.Send<CodeResultJson>(null, url, data, CommonJsonSendType.POST, timeOut);
         }
         #endregion
 
-        #region 异步接口
+#if !NET35 && !NET40
+        #region 异步方法
         /// <summary>
         /// 为授权的小程序帐号上传小程序代码
         /// </summary>
@@ -375,11 +376,12 @@ namespace Senparc.Weixin.Open.WxaAPIs
 
             data = new
             {
-                action = action
+                action = action.ToString()
             };
 
             return await CommonJsonSend.SendAsync<CodeResultJson>(null, url, data, CommonJsonSendType.POST, timeOut);
         }
         #endregion
+#endif
     }
 }

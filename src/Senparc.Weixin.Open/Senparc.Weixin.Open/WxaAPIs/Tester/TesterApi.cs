@@ -30,6 +30,8 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
     修改标识：Senparc - 20170726
     修改描述：完成接口开放平台-代码管理及小程序码获取
     
+    修改标识：Senparc - 20160707
+    修改描述：完善微信开放平台帐号管理
 ----------------------------------------------------------------*/
 
 using Senparc.Weixin.Open.WxaAPIs.Tester;
@@ -45,7 +47,7 @@ namespace Senparc.Weixin.Open.WxaAPIs
 {
     public class TesterApi
     {
-        #region 同步接口
+        #region 同步方法
 
         /// <summary>
         /// 创建开放平台帐号并绑定公众号/小程序。
@@ -121,7 +123,8 @@ namespace Senparc.Weixin.Open.WxaAPIs
         #endregion
 
 
-        #region 异步接口
+#if !NET35 && !NET40
+        #region 异步方法
         /// <summary>
         /// 【异步方法】创建开放平台帐号并绑定公众号/小程序。
         /// 该API用于创建一个开放平台帐号，并将一个尚未绑定开放平台帐号的公众号/小程序绑定至该开放平台帐号上。新创建的开放平台帐号的主体信息将设置为与之绑定的公众号或小程序的主体。
@@ -193,5 +196,6 @@ namespace Senparc.Weixin.Open.WxaAPIs
         }
 
         #endregion
+#endif
     }
 }
