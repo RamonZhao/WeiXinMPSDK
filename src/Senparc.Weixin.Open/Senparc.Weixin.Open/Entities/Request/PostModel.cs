@@ -1,5 +1,5 @@
 ﻿/*----------------------------------------------------------------
-    Copyright (C) 2017 Senparc
+    Copyright (C) 2018 Senparc
     
     文件名：PostModel.cs
     文件功能描述：微信公众服务器Post过来的加密参数集合（不包括PostData）
@@ -7,7 +7,12 @@
     
     创建标识：Senparc - 201500712
  
+    修改标识：Senparc - 20180901
+    修改描述：支持 NeuChar
+
 ----------------------------------------------------------------*/
+
+using Senparc.NeuChar;
 
 namespace Senparc.Weixin.Open.Entities.Request
 {

@@ -1,7 +1,7 @@
 ﻿#region Apache License Version 2.0
 /*----------------------------------------------------------------
 
-Copyright 2017 Jeffrey Su & Suzhou Senparc Network Technology Co.,Ltd.
+Copyright 2018 Jeffrey Su & Suzhou Senparc Network Technology Co.,Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 except in compliance with the License. You may obtain a copy of the License at
@@ -18,7 +18,7 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
 ----------------------------------------------------------------*/
 #endregion Apache License Version 2.0
 /*----------------------------------------------------------------
-    Copyright (C) 2017 Senparc
+    Copyright (C) 2018 Senparc
     
     文件名：CustomAPI.cs
     文件功能描述：客服接口
@@ -62,9 +62,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Senparc.Weixin.Entities;
 using Senparc.Weixin.Helpers;
-using Senparc.Weixin.Helpers.Extensions;
+using Senparc.CO2NET.Extensions;
 using Senparc.Weixin.MP.CommonAPIs;
 using Senparc.Weixin.MP.Entities;
+using Senparc.CO2NET.Helpers.Serializers;
+using Senparc.NeuChar.Entities;
 
 namespace Senparc.Weixin.MP.AdvancedAPIs
 {
@@ -73,7 +75,10 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
     /// </summary>
     public static class CustomApi
     {
-        private const string URL_FORMAT = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token={0}";
+        /// <summary>
+        /// 客服消息统一请求地址格式
+        /// </summary>
+        public static readonly string UrlFormat = Config.ApiMpHost + "/cgi-bin/message/custom/send?access_token={0}";
 
         #region 同步方法
 
@@ -93,14 +98,14 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             if (kfAccount.IsNullOrWhiteSpace())
             {
                 data = new
-                 {
-                     touser = openId,
-                     msgtype = "text",
-                     text = new
-                     {
-                         content = content
-                     }
-                 };
+                {
+                    touser = openId,
+                    msgtype = "text",
+                    text = new
+                    {
+                        content = content
+                    }
+                };
             }
             else
             {
@@ -122,7 +127,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
 
             return ApiHandlerWapper.TryCommonApi(accessToken =>
             {
-                return CommonJsonSend.Send(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return CommonJsonSend.Send(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -171,8 +176,8 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             }
             return ApiHandlerWapper.TryCommonApi(accessToken =>
             {
-                return CommonJsonSend.Send(accessToken, URL_FORMAT, data, timeOut: timeOut);
-                
+                return CommonJsonSend.Send(accessToken, UrlFormat, data, timeOut: timeOut);
+
             }, accessTokenOrAppId);
         }
 
@@ -221,7 +226,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             return ApiHandlerWapper.TryCommonApi(accessToken =>
             {
 
-                return CommonJsonSend.Send(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return CommonJsonSend.Send(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -278,7 +283,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             return ApiHandlerWapper.TryCommonApi(accessToken =>
             {
 
-                return CommonJsonSend.Send(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return CommonJsonSend.Send(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -339,7 +344,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             }
             return ApiHandlerWapper.TryCommonApi(accessToken =>
             {
-                return CommonJsonSend.Send(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return CommonJsonSend.Send(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -399,7 +404,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             }
             return ApiHandlerWapper.TryCommonApi(accessToken =>
             {
-                return CommonJsonSend.Send(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return CommonJsonSend.Send(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -448,7 +453,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             return ApiHandlerWapper.TryCommonApi(accessToken =>
             {
 
-                return CommonJsonSend.Send(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return CommonJsonSend.Send(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -478,10 +483,10 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                 };
                 JsonSetting jsonSetting = new JsonSetting()
                 {
-                    TypesToIgnore = new List<System.Type>() { typeof(CardExt) }
+                    TypesToIgnoreNull = new List<System.Type>() { typeof(CardExt) }
                 };
 
-                return CommonJsonSend.Send(accessToken, URL_FORMAT, data, timeOut: timeOut, jsonSetting: jsonSetting);
+                return CommonJsonSend.Send(accessToken, UrlFormat, data, timeOut: timeOut, jsonSetting: jsonSetting);
 
             }, accessTokenOrAppId);
         }
@@ -537,7 +542,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
             {
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -586,7 +591,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
             {
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -634,7 +639,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
             {
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -690,7 +695,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             }
             return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
             {
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -752,7 +757,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
             {
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -814,7 +819,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
             {
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -864,7 +869,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
             {
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, URL_FORMAT, data, timeOut: timeOut);
+                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, UrlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -894,10 +899,10 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                 };
                 JsonSetting jsonSetting = new JsonSetting()
                 {
-                    TypesToIgnore = new List<System.Type>() { typeof(CardExt) }
+                    TypesToIgnoreNull = new List<System.Type>() { typeof(CardExt) }
                 };
 
-                return  await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, URL_FORMAT, data, timeOut: timeOut, jsonSetting: jsonSetting);
+                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync(accessToken, UrlFormat, data, timeOut: timeOut, jsonSetting: jsonSetting);
 
             }, accessTokenOrAppId);
         }

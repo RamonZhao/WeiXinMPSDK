@@ -1,7 +1,7 @@
 ﻿#region Apache License Version 2.0
 /*----------------------------------------------------------------
 
-Copyright 2017 Jeffrey Su & Suzhou Senparc Network Technology Co.,Ltd.
+Copyright 2018 Jeffrey Su & Suzhou Senparc Network Technology Co.,Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 except in compliance with the License. You may obtain a copy of the License at
@@ -19,7 +19,7 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
 #endregion Apache License Version 2.0
 
 /*----------------------------------------------------------------
-    Copyright (C) 2017 Senparc
+    Copyright (C) 2018 Senparc
     
     文件名：MessageAgent.cs
     文件功能描述：代理请求
@@ -41,9 +41,10 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
 using System;
 using System.IO;
 using System.Xml.Linq;
-using Senparc.Weixin.HttpUtility;
-using Senparc.Weixin.MP.Entities;
-using Senparc.Weixin.MP.Helpers;
+using Senparc.CO2NET.Extensions;
+using Senparc.CO2NET.HttpUtility;
+using Senparc.NeuChar.Entities;
+using Senparc.NeuChar.Helpers;
 using Senparc.Weixin.MP.MessageHandlers;
 
 namespace Senparc.Weixin.MP.Agent
@@ -161,7 +162,7 @@ namespace Senparc.Weixin.MP.Agent
         /// <returns></returns>
         public static IResponseMessageBase RequestResponseMessage(this IMessageHandler messageHandler, string url, string token, Stream stream, int timeOut = AGENT_TIME_OUT)
         {
-            return messageHandler.RequestXml(url, token, stream, timeOut: timeOut).CreateResponseMessage();
+            return messageHandler.RequestXml(url, token, stream, timeOut: timeOut).CreateResponseMessage(messageHandler.MessageEntityEnlighten);
         }
 
         /// <summary>
@@ -175,7 +176,7 @@ namespace Senparc.Weixin.MP.Agent
         /// <returns></returns>
         public static IResponseMessageBase RequestResponseMessage(this IMessageHandler messageHandler, string url, string token, string xml, int timeOut = AGENT_TIME_OUT)
         {
-            return messageHandler.RequestXml(url, token, xml, timeOut).CreateResponseMessage();
+            return messageHandler.RequestXml(url, token, xml, timeOut).CreateResponseMessage(messageHandler.MessageEntityEnlighten);
         }
 
         /// <summary>
@@ -189,7 +190,7 @@ namespace Senparc.Weixin.MP.Agent
         /// <returns></returns>
         public static IResponseMessageBase RequestWeiweihiResponseMessage(this IMessageHandler messageHandler, string weiweihiKey, string xml, string weiweihiDomainName = "www.weiweihi.com", int timeOut = AGENT_TIME_OUT)
         {
-            return messageHandler.RequestWeiWeiHiXml(weiweihiKey, xml, weiweihiDomainName, timeOut).CreateResponseMessage();
+            return messageHandler.RequestWeiWeiHiXml(weiweihiKey, xml, weiweihiDomainName, timeOut).CreateResponseMessage(messageHandler.MessageEntityEnlighten);
         }
 
         /// <summary>
@@ -203,7 +204,7 @@ namespace Senparc.Weixin.MP.Agent
         /// <returns></returns>
         public static IResponseMessageBase RequestWeiweihiResponseMessage(this IMessageHandler messageHandler, string weiweihiKey, XDocument document, string weiweihiDomainName = "www.weiweihi.com", int timeOut = AGENT_TIME_OUT)
         {
-            return messageHandler.RequestWeiWeiHiXml(weiweihiKey, document.ToString(), weiweihiDomainName, timeOut).CreateResponseMessage();
+            return messageHandler.RequestWeiWeiHiXml(weiweihiKey, document.ToString(), weiweihiDomainName, timeOut).CreateResponseMessage(messageHandler.MessageEntityEnlighten);
         }
 
         /// <summary>
@@ -217,7 +218,7 @@ namespace Senparc.Weixin.MP.Agent
         /// <returns></returns>
         public static IResponseMessageBase RequestWeiweihiResponseMessage(this IMessageHandler messageHandler, string weiweihiKey, RequestMessageBase requestMessage, string weiweihiDomainName = "www.weiweihi.com", int timeOut = AGENT_TIME_OUT)
         {
-            return messageHandler.RequestWeiWeiHiXml(weiweihiKey, requestMessage.ConvertEntityToXmlString(), weiweihiDomainName, timeOut).CreateResponseMessage();
+            return messageHandler.RequestWeiWeiHiXml(weiweihiKey, requestMessage.ConvertEntityToXmlString(), weiweihiDomainName, timeOut).CreateResponseMessage(messageHandler.MessageEntityEnlighten);
         }
 
         /// <summary>

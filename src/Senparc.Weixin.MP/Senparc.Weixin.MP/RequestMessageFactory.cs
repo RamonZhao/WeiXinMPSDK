@@ -1,7 +1,7 @@
 ﻿#region Apache License Version 2.0
 /*----------------------------------------------------------------
 
-Copyright 2017 Jeffrey Su & Suzhou Senparc Network Technology Co.,Ltd.
+Copyright 2018 Jeffrey Su & Suzhou Senparc Network Technology Co.,Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 except in compliance with the License. You may obtain a copy of the License at
@@ -19,7 +19,7 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
 #endregion Apache License Version 2.0
 
 /*----------------------------------------------------------------
-    Copyright (C) 2017 Senparc
+    Copyright (C) 2018 Senparc
   
     文件名：RequestMessageFactory.cs
     文件功能描述：获取XDocument转换后的IRequestMessageBase实例
@@ -32,6 +32,9 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
     
     修改标识：Senparc - 20150327
     修改描述：添加小视频类型
+    
+    修改标识：Senparc - 20180829
+    修改描述：v15.4.0 支持NeuChar，添加 RequestMessageNeuChar() 方法
 
 ----------------------------------------------------------------*/
 
@@ -39,6 +42,9 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Senparc.NeuChar;
+using Senparc.NeuChar.Entities;
+using Senparc.NeuChar.Helpers;
 using Senparc.Weixin.Exceptions;
 using Senparc.Weixin.MP.Entities;
 using Senparc.Weixin.MP.Entities.Request;
@@ -96,6 +102,12 @@ namespace Senparc.Weixin.MP
                         break;
                     case RequestMsgType.ShortVideo:
                         requestMessage = new RequestMessageShortVideo();
+                        break;
+                    case RequestMsgType.File:
+                        requestMessage = new RequestMessageFile();
+                        break;
+                    case RequestMsgType.NeuChar:
+                        requestMessage = new RequestMessageNeuChar();
                         break;
                     case RequestMsgType.Event:
                         //判断Event类型
@@ -208,6 +220,18 @@ namespace Senparc.Weixin.MP
                                 requestMessage = new RequestMessageEvent_Card_Pay_Order();
                                 break;
 
+                            #region 卡券回调
+                            case "GIFTCARD_PAY_DONE"://券点流水详情事件：当商户朋友的券券点发生变动时
+                                requestMessage = new RequestMessageEvent_GiftCard_Pay_Done();
+                                break;
+                            case "GIFTCARD_SEND_TO_FRIEND"://券点流水详情事件：当商户朋友的券券点发生变动时
+                                requestMessage = new RequestMessageEvent_GiftCard_Send_To_Friend();
+                                break;
+                            case "GIFTCARD_USER_ACCEPT"://券点流水详情事件：当商户朋友的券券点发生变动时
+                                requestMessage = new RequestMessageEvent_GiftCard_User_Accept();
+                                break;
+                            #endregion
+
                             #region 微信认证事件推送
                             case "QUALIFICATION_VERIFY_SUCCESS"://资质认证成功（此时立即获得接口权限）
                                 requestMessage = new RequestMessageEvent_QualificationVerifySuccess();
@@ -245,9 +269,24 @@ namespace Senparc.Weixin.MP
                         }
                         break;
                     default:
-                        throw new UnknownRequestMsgTypeException(string.Format("MsgType：{0} 在RequestMessageFactory中没有对应的处理程序！", msgType), new ArgumentOutOfRangeException());//为了能够对类型变动最大程度容错（如微信目前还可以对公众账号suscribe等未知类型，但API没有开放），建议在使用的时候catch这个异常
+                        {
+                            requestMessage = new RequestMessageUnknownType()
+                            {
+                                RequestDocument = doc
+                            };
+
+                            #region v14.8.3 之前的方案，直接在这里抛出异常
+
+                            /*
+                            throw new UnknownRequestMsgTypeException(string.Format("MsgType：{0} 在RequestMessageFactory中没有对应的处理程序！", msgType), new ArgumentOutOfRangeException());//为了能够对类型变动最大程度容错（如微信目前还可以对公众账号suscribe等未知类型，但API没有开放），建议在使用的时候catch这个异常
+                            */
+
+                            #endregion
+
+                            break;
+                        }
                 }
-                EntityHelper.FillEntityWithXml(requestMessage, doc);
+                Senparc.NeuChar.Helpers.EntityHelper.FillEntityWithXml(requestMessage, doc);
             }
             catch (ArgumentException ex)
             {

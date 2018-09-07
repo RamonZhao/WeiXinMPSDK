@@ -1,5 +1,5 @@
 ﻿/*----------------------------------------------------------------
-    Copyright (C) 2017 Senparc
+    Copyright (C) 2018 Senparc
     
     文件名：RequestMessageBase.cs
     文件功能描述：第三方应用授权回调消息服务
@@ -15,7 +15,7 @@ namespace Senparc.Weixin.Open
     /// <summary>
     /// 请求消息接口
     /// </summary>
-    public interface IRequestMessageBase// : Weixin.Entities.IRequestMessageBase
+    public interface IRequestMessageBase// : Senparc.NeuChar.Entities.IRequestMessageBase
     {
         string AppId { get; set; }
         DateTime CreateTime { get; set; }
