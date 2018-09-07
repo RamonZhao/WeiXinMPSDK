@@ -17,13 +17,12 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Senparc.Weixin.MP.BuildOutPut\</OutputPath>
+    <OutputPath>..\..\Senparc.Weixin.MP.BuildOutPut\.net4.5\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NET45</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>..\..\Senparc.Weixin.MP.BuildOutPut\.net4.5\Senparc.Weixin.MP.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,8 +54,18 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Samples\Senparc.Weixin.MP.Sample\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.CO2NET, Version=0.2.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Samples\Senparc.Weixin.MP.Sample\packages\Senparc.CO2NET.0.2.10\lib\net45\Senparc.CO2NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.NeuChar, Version=0.0.6.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Samples\Senparc.Weixin.MP.Sample\packages\Senparc.NeuChar.0.0.6.9\lib\net45\Senparc.NeuChar.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -80,6 +89,7 @@
     <Compile Include="AdvancedAPIs\Card\CardCreate\CardCreateInfo.cs" />
     <Compile Include="AdvancedAPIs\Card\CardCreate\CardCreateInfo_Card.cs" />
     <Compile Include="AdvancedAPIs\Card\CardCreate\CardCreateResultJson.cs" />
+    <Compile Include="AdvancedAPIs\Card\CardCreate\CardQRInfo.cs" />
     <Compile Include="AdvancedAPIs\Card\CardCreate\NorFilter.cs" />
     <Compile Include="AdvancedAPIs\Card\CardManage\ActivateUserFormSetData.cs" />
     <Compile Include="AdvancedAPIs\Card\CardManage\BaseCardUpdateInfo.cs" />
@@ -100,6 +110,8 @@
     <Compile Include="AdvancedAPIs\Card\Submerchat\SubmerChantBatchGetJsonResult.cs" />
     <Compile Include="AdvancedAPIs\Card\Submerchat\SubmerChantSubmitJsonResult.cs" />
     <Compile Include="AdvancedAPIs\Card\UserInfo\UserinfoGetResult.cs" />
+    <Compile Include="AdvancedAPIs\Comment\CommentApi.cs" />
+    <Compile Include="AdvancedAPIs\Comment\CommentJson\ListResultJson.cs" />
     <Compile Include="AdvancedAPIs\CustomService\ChatLogJson\GetMsgListResultJson.cs" />
     <Compile Include="AdvancedAPIs\CustomService\CustomerServiceManageJson\CustomInfoJson.cs" />
     <Compile Include="AdvancedAPIs\CustomService\CustomerServiceManageJson\CustomOnlineJson.cs" />
@@ -112,9 +124,11 @@
     <Compile Include="AdvancedAPIs\Custom\CardExt.cs" />
     <Compile Include="AdvancedAPIs\Custom\CustomApi.cs" />
     <Compile Include="AdvancedAPIs\GroupMessage\GroupMessageApi.cs" />
+    <Compile Include="AdvancedAPIs\GroupMessage\GroupMessageJson\ByFilter\BaseGroupMessageDataByFilter.cs" />
+    <Compile Include="AdvancedAPIs\GroupMessage\GroupMessageJson\ByFilter\GroupMessageByTagId.cs" />
     <Compile Include="AdvancedAPIs\GroupMessage\GroupMessageJson\NewsModel.cs" />
     <Compile Include="AdvancedAPIs\GroupMessage\GroupMessageJson\SendResult.cs" />
-    <Compile Include="AdvancedAPIs\GroupMessage\GroupMessageJson\BaseGroupMessageDataByGroupId.cs" />
+    <Compile Include="AdvancedAPIs\GroupMessage\GroupMessageJson\ByFilter\GroupMessageByGroupId.cs" />
     <Compile Include="AdvancedAPIs\GroupMessage\GroupMessageJson\BaseGroupMessageDataByOpenId.cs" />
     <Compile Include="AdvancedAPIs\GroupMessage\GroupMessageJson\BaseGroupMessageDataPreview.cs" />
     <Compile Include="AdvancedAPIs\GroupMessage\GroupMessageJson\VideoMediaIdResult.cs" />
@@ -123,6 +137,7 @@
     <Compile Include="AdvancedAPIs\Groups\GroupsApi.cs" />
     <Compile Include="AdvancedAPIs\Groups\GroupsJson\GroupsJson.cs" />
     <Compile Include="AdvancedAPIs\Media\MediaApi.cs" />
+    <Compile Include="AdvancedAPIs\Media\MediaJson\GetForeverMediaVideoResultJson.cs" />
     <Compile Include="AdvancedAPIs\Media\MediaJson\GetNewsResultJson.cs" />
     <Compile Include="AdvancedAPIs\Media\MediaJson\UpdateForeverNewsData.cs" />
     <Compile Include="AdvancedAPIs\Media\MediaJson\GetMediaCountResultJson.cs" />
@@ -145,6 +160,7 @@
     <Compile Include="AdvancedAPIs\MerChant\Shelf\ShelfResult.cs" />
     <Compile Include="AdvancedAPIs\MerChant\Stock\StockApi.cs" />
     <Compile Include="AdvancedAPIs\MerChant\Stock\StockPostData.cs" />
+    <Compile Include="AdvancedAPIs\MpApiEnlighten.cs" />
     <Compile Include="AdvancedAPIs\OAuth\OAuthJson\OAuthAccessTokenResult.cs" />
     <Compile Include="AdvancedAPIs\OAuth\OAuthApi.cs" />
     <Compile Include="AdvancedAPIs\OAuth\OAuthJson\OAuthUserInfo.cs" />
@@ -218,7 +234,8 @@
     <Compile Include="AdvancedAPIs\TemplateMessage\TemplateMessageJson\GetPrivateTemplateJsonResult.cs" />
     <Compile Include="AdvancedAPIs\TemplateMessage\TemplateMessageJson\SendTemplateMessageResult.cs" />
     <Compile Include="AdvancedAPIs\TemplateMessage\TemplateMessageJson\TemplateDataItem.cs" />
-    <Compile Include="AdvancedAPIs\TemplateMessage\TemplateMessageJson\TempleteModel.cs" />
+    <Compile Include="AdvancedAPIs\TemplateMessage\TemplateMessageJson\TempleteModel\SubscribeMsgTempleteModel.cs" />
+    <Compile Include="AdvancedAPIs\TemplateMessage\TemplateMessageJson\TempleteModel\TempleteModel.cs" />
     <Compile Include="AdvancedAPIs\Analysis\AnalysisResultJson\UserAnalysisItemJson.cs" />
     <Compile Include="AdvancedAPIs\UserTag\UserTagApi.cs" />
     <Compile Include="AdvancedAPIs\UserTag\UserTagJson\CreateTagResult.cs" />
@@ -271,6 +288,7 @@
     <Compile Include="CommonAPIs\Menu\CommonApi.Menu.Common.cs" />
     <Compile Include="CommonAPIs\Menu\CommonApi.Menu.Conditional.cs" />
     <Compile Include="CommonAPIs\Menu\CommonApi.Menu.Custom.cs" />
+    <Compile Include="Containers\WxCardApiTicketContainer.cs" />
     <Compile Include="Entities\JsonResult\GetCallBackIpResult.cs" />
     <Compile Include="Entities\JsonResult\JsApiTicketResult.cs" />
     <Compile Include="Entities\JsonResult\Menu\CreateMenuConditionalResult.cs" />
@@ -306,7 +324,6 @@
     <Compile Include="Entities\Request\Event\RequestMessageEvent_TemplateSendJobFinish.cs" />
     <Compile Include="Entities\Request\Event\RequestMessageEvent_Location_Select.cs" />
     <Compile Include="Entities\Request\Event\RequestMessageEvent_PicWeixin.cs" />
-    <Compile Include="Entities\Request\Event\SendLocationInfo.cs" />
     <Compile Include="Entities\Request\Event\Card\RequestMessageEvent_Card_Pass_Check.cs" />
     <Compile Include="Entities\Request\Event\Card\RequestMessageEvent_Card_Not_Pass_Check.cs" />
     <Compile Include="Entities\Request\Event\RequestMessageEvent_User_Get_Card.cs" />
@@ -314,53 +331,60 @@
     <Compile Include="Entities\Request\Event\Kf\RequestMessageEvent_Kf_Create_Session.cs" />
     <Compile Include="Entities\Request\Event\Kf\RequestMessageEvent_Kf_Close_Session.cs" />
     <Compile Include="Entities\Request\Event\Kf\RequestMessageEvent_Kf_Switch_Session.cs" />
-    <Compile Include="Entities\Request\Event\ShakearoundUserShake.cs" />
     <Compile Include="Entities\Request\PostModel.cs" />
-    <Compile Include="Entities\Request\Event\ScanCodeInfo.cs" />
-    <Compile Include="Entities\Request\Event\SendPicsInfo.cs" />
+    <Compile Include="Entities\Request\RequestMessageFile.cs" />
     <Compile Include="Entities\Request\RequestMessageShortVideo.cs" />
-    <Compile Include="Entities\Response\ResponseMessageBase.cs" />
-    <Compile Include="Entities\Response\ResponseMessageNoResponse.cs" />
-    <Compile Include="Entities\Response\SuccessResponseMessage.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Helpers\EventHelper.cs" />
     <Compile Include="Helpers\JSSDK\JSSDKPackage.cs" />
-    <Compile Include="Helpers\MsgTypeHelper.cs" />
     <Compile Include="Helpers\JSSDK\JSSDKHelper.cs" />
-    <Compile Include="Helpers\SHA1UtilHelper.cs" />
+    <Compile Include="MessageHandlers\Async\MessageHandlerAsync.Message.cs" />
+    <Compile Include="MessageHandlers\Async\MessageHandlerAsync.Event.cs" />
+    <Compile Include="MessageHandlers\Async\MessageHandlerAsync.cs" />
     <Compile Include="MessageHandlers\IMessageHandler.cs" />
     <Compile Include="MessageHandlers\MessageHandler.cs" />
     <Compile Include="MessageHandlers\MessageHandler.Event.cs" />
     <Compile Include="MessageHandlers\MessageHandler.Message.cs" />
+    <Compile Include="MessageHandlers\MessageHandler.NeuChar.cs" />
+    <Compile Include="MessageHandlers\MpMessageEntityEnlighten.cs" />
+    <Compile Include="Register.cs" />
     <Compile Include="RequestMessageFactory.cs" />
     <Compile Include="ResponseMessageFactory.cs" />
     <Compile Include="Tencent\Cryptography.cs" />
     <Compile Include="Tencent\WXBizMsgCrypt.cs" />
-    <Compile Include="TenPayLibV3\Entities\NormalRedPackResult.cs" />
-    <Compile Include="TenPayLibV3\Entities\SearchRedPackResult.cs" />
-    <Compile Include="TenPayLibV3\RedPack\RedPackApi.cs" />
-    <Compile Include="TenPayLibV3\RedPack\RedPackApi.Via.cs" />
+    <Compile Include="TenPayLibV3\Entities\NormalRedPackParameters.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\PayBank\TenPayV3GetPublicKeyRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\PayBank\TenPayV3PayBankRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\PayBank\TenPayV3QueryBankRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\ServiceProvider\TenPayV3MicroPayRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3CloseOrderRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3DownloadBillRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3GetSignKeyRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3GetTransferInfoRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3MicroPayRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3OrderQueryRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3RefundQueryRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3RefundRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3RequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3ReverseRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3ShortUrlRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3TransfersRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3UnifiedorderRequestData.cs" />
+    <Compile Include="TenPayLibV3\Entities\Request\TenPayV3UnifiedorderRequestData_SceneInfo.cs" />
+    <Compile Include="TenPayLibV3\Entities\Result\NormalRedPackResult.cs" />
+    <Compile Include="TenPayLibV3\Entities\Result\PayBank\TenPayV3Results.PayBank.cs" />
+    <Compile Include="TenPayLibV3\Entities\Result\SearchRedPackResult.cs" />
+    <Compile Include="TenPayLibV3\Entities\Result\TenPayV3Results.cs" />
     <Compile Include="TenPayLibV3\RequestHandler.cs" />
     <Compile Include="TenPayLibV3\ResponseHandler.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3Api\RedPackApi\RedPackApi.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3Api\RedPackApi\RedPackApi.Via.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3Api\TenPayV3.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3Api\TenpayV3.PayBank.cs" />
     <Compile Include="TenPayLibV3\TenPayV3InfoCollection.cs" />
     <Compile Include="TenPayLibV3\TenPayV3Info.cs" />
     <Compile Include="TenPayLibV3\TenPayV3Util.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\ServiceProvider\TenPayV3MicroPayRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3GetTransferInfoRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3DownloadBillRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3RefundRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3TransfersRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3RefundQueryRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3MicroPayRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3ShortUrlRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3UnifiedorderRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3ReverseRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3OrderQueryRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3CloseOrderRequestData.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3Result.cs" />
-    <Compile Include="TenPayLibV3\TenPayV3\TenPayV3RequestData.cs" />
     <Compile Include="TenPayLib\CheckRequestHandler.cs" />
     <Compile Include="TenPayLib\RefundQueryRequestHandler.cs" />
     <Compile Include="TenPayLib\ClientRequestHandler.cs" />
@@ -373,9 +397,7 @@
     <Compile Include="CommonAPIs\ApiHandlerWapper.cs" />
     <Compile Include="CommonAPIs\CommonApi.cs" />
     <Compile Include="CommonAPIs\CommonJsonSend.cs" />
-    <Compile Include="Entities\BaiduMap\BaiduMapMarkers.cs" />
     <Compile Include="Entities\Extensions.cs" />
-    <Compile Include="Entities\GoogleMap\GoogleMapMarkers.cs" />
     <Compile Include="Entities\JsonResult\AccessTokenResult.cs" />
     <Compile Include="Entities\JsonResult\Menu\GetMenuResultFull.cs" />
     <Compile Include="Entities\JsonResult\Menu\GetMenuResult.cs" />
@@ -388,9 +410,6 @@
     <Compile Include="Entities\Menu\Buttons\SubButton.cs" />
     <Compile Include="Entities\Menu\Buttons\SingleViewButton.cs" />
     <Compile Include="Entities\Request\Event\IRequestMessageEventKey.cs" />
-    <Compile Include="Entities\Request\RequestMessageBase.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Entities\Request\Event\RequestMessageEventBase.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -420,13 +439,6 @@
     <Compile Include="Entities\Request\Event\RequestMessageEvent_Scan.cs" />
     <Compile Include="Entities\Request\RequestMessageVideo.cs" />
     <Compile Include="Entities\Request\Event\RequestMessageEvent_View.cs" />
-    <Compile Include="Entities\Response\Article.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Entities\Response\Image.cs" />
-    <Compile Include="Entities\Response\Music.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Entities\Response\ResponseMessageMusic.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -439,14 +451,8 @@
     <Compile Include="Entities\Response\ResponseMessageImage.cs" />
     <Compile Include="Entities\Response\ResponseMessagetTransfer_Customer_Service.cs" />
     <Compile Include="Entities\Response\ResponseMessageVoice.cs" />
-    <Compile Include="Entities\Response\Video.cs" />
-    <Compile Include="Entities\Response\Voice.cs" />
     <Compile Include="Entities\Response\ResponseMessageVideo.cs" />
-    <Compile Include="Helpers\BaiduMapHelper.cs" />
-    <Compile Include="Helpers\GoogleMapHelper.cs" />
-    <Compile Include="Helpers\GpsHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers\MD5UtilHelper.cs" />
     <Compile Include="TenPayLib\QRCode.cs" />
     <Compile Include="TenPayLib\RequestHandler.cs" />
     <Compile Include="TenPayLib\ResponseHandler.cs" />
@@ -496,18 +502,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdvancedAPIs\Card\readme.txt" />
-    <Content Include="TenPayLibV3\TenPayV3\Normal\readme.txt" />
-    <Content Include="TenPayLibV3\TenPayV3\ServiceProvider\readme.txt" />
+    <Content Include="TenPayLibV3\Entities\Request\ServiceProvider\readme.txt" />
+    <Content Include="TenPayLibV3\TenPayV3Api\Normal\readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdvancedAPIs\Scan\ScanJson\BrandInfo_Type.cs">
       <SubType>Code</SubType>
     </Compile>
+    <None Include="AdvancedAPIs\GroupMessage\GroupMessageJson\ByFilter\readme.md" />
     <None Include="ClassDiagrams\MessageHandler.cd" />
     <None Include="ClassDiagrams\Menu.cd" />
     <None Include="Entities\Request\Event\Verify\readme.md" />
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="NeuChar\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
