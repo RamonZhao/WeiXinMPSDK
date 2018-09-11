@@ -60,8 +60,8 @@
     <Reference Include="Senparc.CO2NET, Version=0.2.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\Samples\Senparc.Weixin.MP.Sample\packages\Senparc.CO2NET.0.2.10\lib\net45\Senparc.CO2NET.dll</HintPath>
     </Reference>
-    <Reference Include="Senparc.NeuChar, Version=0.0.6.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Samples\Senparc.Weixin.MP.Sample\packages\Senparc.NeuChar.0.0.6.9\lib\net45\Senparc.NeuChar.dll</HintPath>
+    <Reference Include="Senparc.NeuChar, Version=0.0.6.14, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Samples\Senparc.Weixin.MP.Sample\packages\Senparc.NeuChar.0.0.6.14\lib\net45\Senparc.NeuChar.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -300,6 +300,9 @@
     <Compile Include="Entities\Menu\ButtonGroupBase.cs" />
     <Compile Include="Entities\Menu\Buttons\SingleScancodePushButton.cs" />
     <Compile Include="Entities\Menu\IButtonGroupBase.cs" />
+    <Compile Include="Entities\Request\Event\GiftCard\RequestMessageEvent_GiftCard_Pay_Done.cs" />
+    <Compile Include="Entities\Request\Event\GiftCard\RequestMessageEvent_GiftCard_Send_To_Friend.cs" />
+    <Compile Include="Entities\Request\Event\GiftCard\RequestMessageEvent_GiftCard_User_Accept.cs" />
     <Compile Include="Entities\Request\Event\WeApp\RequestMessageEvent_WeAppAuditSuccess.cs" />
     <Compile Include="Entities\Request\Event\WeApp\RequestMessageEvent_WeAppAuditFail.cs" />
     <Compile Include="Entities\Request\Event\RequestMessageEvent_Update_Member_Card.cs" />
